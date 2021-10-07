@@ -23,22 +23,13 @@ pipeline {
       }
     }   
     
-    environment {
-       DOCKERHUB_CREDENTIALS = credentials("mukhesh-dockerhub")
-  }
-    
     stage('building docker image from docker file by tagging') {
       steps {
         sh 'docker build -t mukhesh/pipeline:$BUILD_NUMBER .'
       }   
     }
    
-stage('logging into docker hub') {
-      steps {
-        sh 'echo $DOCKERHUB_CREDNETIALS_PSW | docker login -u $DOCKERHB_CREDENTIALS_USR --password-stdin'
-      }   
-    }
-   
+    
     
   }
   
