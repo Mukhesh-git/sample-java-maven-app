@@ -22,21 +22,22 @@ pipeline {
         sh 'mvn clean install package'
       }
     }   
+    
+    environment {
+       DOCKERHUB_CREDENTIALS = credentials("mukhesh-dockerhub")
+  }
+    
     stage('building docker image from docker file by tagging') {
       steps {
         sh 'docker build -t mukhesh/pipeline:$BUILD_NUMBER .'
       }   
     }
    
-  
-  dir(config.buildFolder){
-                newImage = docker.build(${imageTag})
-                docker.withRegistry("https://${registryAddress}", '${credentialsId}'){
-                     newImage.push("${variables.version}")
-
-            }  
-    
-    
+stage('logging into docker hub') {
+      steps {
+        sh 'echo $DOCKERHUB_CREDNETIALS_PSW | docker login -u $DOCKERHB_CREDENTIALS_USR --password-stdin'
+      }   
+    }
    
     
   }
