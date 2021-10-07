@@ -28,7 +28,16 @@ pipeline {
       }   
     }
    
-    
+   stage('logging into docker hub') {
+      steps {
+        sh 'docker login --username="mukhesh" --password="Mukesh$job"'
+      }   
+    }
+     stage('pushing docker image to the docker hub with build number') {
+      steps {
+        sh 'docker push mukhesh/pipeline:$BUILD_NUMBER'
+      }   
+    }
     
   }
   
