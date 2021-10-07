@@ -37,7 +37,11 @@ pipeline {
     }
       
     }
-    
+    stage('pushing docker image to the docker hub with build number') {
+      steps {
+        sh 'docker push mukhesh/pipeline:$BUILD_NUMBER'
+      }   
+    }
   }
   
 }
