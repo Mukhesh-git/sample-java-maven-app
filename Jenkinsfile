@@ -24,7 +24,7 @@ pipeline {
     }   
     stage('building docker image from docker file by tagging') {
       steps {
-        sh 'docker build -t phanirudra9/phani9-devops:$BUILD_NUMBER .'
+        sh 'docker build -t mukhesh/pipeline:$BUILD_NUMBER .'
       }   
     }
    
