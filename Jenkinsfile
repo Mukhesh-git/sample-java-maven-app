@@ -34,7 +34,6 @@ pipeline {
         withCredentials([string(credentialsId: 'docker-pwd', variable: 'dockerHubPwd')]) {
           sh 'docker login -u "mukhesh" -p "${dockerHubPwd}"'
       }
-        sh 'docker push mukhesh/pipeline:$BUILD_NUMBER .'
     }
       
     }
