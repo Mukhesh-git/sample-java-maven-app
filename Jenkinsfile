@@ -28,16 +28,16 @@ pipeline {
       }   
     }
    
-   stage('logging into docker hub') {
-      steps {
-        sh 'docker login --username="mukhesh" --password=""'
-      }   
-    }
-     stage('pushing docker image to the docker hub with build number') {
-      steps {
-        sh 'docker push mukhesh/pipeline:$BUILD_NUMBER'
-      }   
-    }
+  
+  dir(config.buildFolder){
+                newImage = docker.build(${imageTag})
+                docker.withRegistry("https://${registryAddress}", '${credentialsId}'){
+                     newImage.push("${variables.version}")
+
+            }  
+    
+    
+   
     
   }
   
