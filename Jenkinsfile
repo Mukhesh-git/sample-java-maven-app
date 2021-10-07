@@ -30,7 +30,7 @@ pipeline {
    
    stage('logging into docker hub') {
       steps {
-        sh 'docker login --username="mukhesh" --password="Mukesh$job"'
+        sh 'docker login --username="mukhesh" --password=""'
       }   
     }
      stage('pushing docker image to the docker hub with build number') {
