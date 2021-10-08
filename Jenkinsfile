@@ -48,4 +48,16 @@ pipeline {
       }   
     }  
   }
+  post {
+    failure {
+        mail to: 'mukheshgoud40@gmail.com',
+             subject: "Failed Pipeline: ${BUILD_NUMBER}",
+             body: "Something is wrong with ${env.BUILD_URL}"
+    }
+     success {
+        mail to: 'mukheshgoud40@gmail.com',
+             subject: "successful Pipeline:  ${env.BUILD_NUMBER}",
+             body: "Your pipeline is success ${env.BUILD_URL}"
+    }
+}
 }
